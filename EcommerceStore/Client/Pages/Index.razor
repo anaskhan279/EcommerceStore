@@ -3,7 +3,7 @@
 @inject ICategoryAPI categoryService
 @using EcommerceStore.Shared.Models
 
-@if(Category!=null)
+@* @if(Category!=null)
 {
     <h5>Welcome to @Category.Name category</h5>
     <ProductListPage CategoryId="@Category.Id"></ProductListPage>
@@ -11,8 +11,18 @@
 else
 {
     <ProductListPage></ProductListPage>
-}
+} *@
 
+
+
+<ProductListPage></ProductListPage>
+
+@foreach(var cat in categoryService.Categories)
+{
+    <div class="fg-success-1">
+        @cat.Name
+    </div>
+}
 <a href="@($"/books")">books</a>
 @code{
     [Parameter]
@@ -20,16 +30,16 @@ else
 
     public Category Category = null;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        categoryService.LoadCategories();
+        await categoryService.LoadCategories();
     }
-    protected override void OnParametersSet()
-    {
-        if (CategoryUrl != null)
-        {
-            Category = categoryService.Categories.FirstOrDefault(c => c.Url.ToLower().Equals(CategoryUrl.ToLower()));
-        }
-    }
+    // protected override void OnParametersSet()
+    // {
+    //     if (CategoryUrl != null)
+    //     {
+    //         Category = categoryService.Categories.FirstOrDefault(c => c.Url.ToLower().Equals(CategoryUrl.ToLower()));
+    //     }
+    // }
 
 }

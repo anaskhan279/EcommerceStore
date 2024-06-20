@@ -1,17 +1,12 @@
 ﻿using EcommerceStore.Shared.Models;
 
-namespace EcommerceStore.Client.Services
+namespace EcommerceStore.Server.Services
 {
-    public class ProductService : IProductAPI
+    public class ProductService : IProductService
     {
-        public List<Product> Products { get; set; }
-
-        public void LoadProducts()
+        public List<Product> Products { get; set; } = new List<Product>
         {
-
-            Products = new List<Product>
-            {
-                new Product
+            new Product
                 {
                     Id=1,
                     CategoryId=2,
@@ -39,7 +34,10 @@ namespace EcommerceStore.Client.Services
                     Price= (decimal)9.99,
                     OriginalPrice= (decimal)10.99,
                 },
-            };
+        };
+        public async Task<List<Product>> FetchProducts()
+        {
+            return Products;
         }
     }
 }
