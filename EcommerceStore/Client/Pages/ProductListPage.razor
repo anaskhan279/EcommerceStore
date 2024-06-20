@@ -1,0 +1,23 @@
+﻿@using EcommerceStore.Shared.Models
+@inject IProductAPI products
+
+<h3>ProductListPage</h3>
+
+@foreach(var p in CategoryId == null ? products.Products : products.Products.Where(p=> p.CategoryId == CategoryId))
+{
+    <div class="p-5 container-bg-2">
+        <h5>@p.Title</h5>
+        <h6>@p.Description</h6>
+        <span>@p.Price</span>
+        <a href="@($"/product/{p.Id}")">navigate</a>
+    </div>
+}
+@code {
+    [Parameter]
+    public int? CategoryId { get; set; } = null;
+    protected override void OnInitialized()
+    {
+        products.LoadProducts();
+    }
+
+}

@@ -1,0 +1,22 @@
+﻿@page "/product/{id:int}"
+@using EcommerceStore.Shared.Models
+@inject IProductAPI products
+
+<h3>ProductDetailsPage</h3>
+<p>@Id</p>
+<div>@product.Title</div>
+@code {
+    [Parameter]
+    public int Id{ get; set; }
+
+    public Product product { get; set; } = null;
+    protected override void OnInitialized()
+    {
+        if(product==null || products.Products.Count==0)
+        {
+            products.LoadProducts();
+        }
+        product = products.Products.FirstOrDefault(p => p.Id == Id);
+        StateHasChanged();
+    }
+}
