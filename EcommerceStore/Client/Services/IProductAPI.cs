@@ -6,5 +6,6 @@ namespace EcommerceStore.Client.Services
     {
         List<Product> Products { get; set; }
         Task LoadProducts();
+        Task<Product> GetProductById(int id);
     }
 }
