@@ -1,23 +1,25 @@
-﻿using EcommerceStore.Shared.Models;
+﻿using EcommerceStore.Server.Data;
+using EcommerceStore.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceStore.Server.Services
 {
     public class CategoryService : ICategoryService
     {
-        public List<Category> Categories { get; set; } = new List<Category>
-                {
-                    new Category { Id = 4, Name="books" },
-                    new Category { Id = 2, Name="glasses" },
-                    new Category { Id = 3, Name="bikes" }
-                };
+     
+        private readonly DataContext _context;
+        public CategoryService(DataContext context)
+        {
+            _context = context;
+        }
         public async Task<List<Category>> GetCategories()
         {
-            return Categories;
+            return await _context.Categories.ToListAsync();
         }
 
         public async Task<Category> GetCategoryByUrl(string categoryUrl)
         {
-            return Categories.FirstOrDefault(c => c.Url.ToLower().Equals(categoryUrl.ToLower()));
+            return await _context.Categories.FirstOrDefaultAsync(c => c.Url.ToLower().Equals(categoryUrl.ToLower()));
         }
     }
 }
