@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EcommerceStore.Shared.Models
 {
     public class Product
@@ -6,7 +8,9 @@ namespace EcommerceStore.Shared.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal OriginalPrice { get; set; }
         public string Image { get; set; }
         public bool IsPublic { get; set; }

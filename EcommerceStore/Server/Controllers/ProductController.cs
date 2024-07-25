@@ -33,10 +33,6 @@ namespace EcommerceStore.Server.Controllers
         {
             return Ok(await _productService.GetProduct(id));
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
-        {
-            return Ok(await _productService.GetProduct(id));
-        }
+      
     }
 }
