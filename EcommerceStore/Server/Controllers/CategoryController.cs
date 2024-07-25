@@ -16,7 +16,7 @@ namespace EcommerceStore.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Category>>>GetCategories()
         {
-            return Ok(await _categoryService.FetchCategories());
+            return Ok(await _categoryService.GetCategories());
         }
     }
 }

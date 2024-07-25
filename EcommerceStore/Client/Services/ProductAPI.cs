@@ -1,5 +1,6 @@
 ﻿using EcommerceStore.Shared.Models;
 using System.Net.Http.Json;
+using static System.Net.WebRequestMethods;
 
 namespace EcommerceStore.Client.Services
 {
@@ -11,6 +12,11 @@ namespace EcommerceStore.Client.Services
             _httpClient = httpClient;
         }
         public List<Product> Products { get; set; } = new List<Product>();
+
+        public async Task<Product> GetProduct(int id)
+        {
+            return await _httpClient.GetFromJsonAsync<Product>($"api/Product/{id}");
+        }
 
         public async Task LoadProducts()
         {

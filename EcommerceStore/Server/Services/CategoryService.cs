@@ -10,9 +10,14 @@ namespace EcommerceStore.Server.Services
                     new Category { Id = 2, Name="glasses" },
                     new Category { Id = 3, Name="bikes" }
                 };
-        public async Task<List<Category>> FetchCategories()
+        public async Task<List<Category>> GetCategories()
         {
             return Categories;
+        }
+
+        public async Task<Category> GetCategoryByUrl(string categoryUrl)
+        {
+            return Categories.FirstOrDefault(c => c.Url.ToLower().Equals(categoryUrl.ToLower()));
         }
     }
 }
