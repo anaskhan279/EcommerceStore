@@ -15,9 +15,9 @@ namespace EcommerceStore.Client.Services
 
         public async Task<Product> GetProductById(int id)
         {
-            return await _httpClient.GetFromJsonAsync<Product>($"/api/product/{id}");
+            return await _httpClient.GetFromJsonAsync<Product>($"/api/Product/{id}");
         }
-
+        
         public async Task LoadProducts()
         {
             Products = await _httpClient.GetFromJsonAsync<List<Product>>("/api/Product");

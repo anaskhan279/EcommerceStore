@@ -4,6 +4,7 @@ using EcommerceStore.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceStore.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240726100203_EditionModelAdded")]
+    partial class EditionModelAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,41 +84,14 @@ namespace EcommerceStore.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Editions");
+                    b.HasIndex("ProductId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Papaer-back"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "e-book"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "X-master"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "pc"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "P-hub"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Only-fans"
-                        });
+                    b.ToTable("Editions");
                 });
 
             modelBuilder.Entity("EcommerceStore.Shared.Models.Product", b =>
@@ -205,82 +180,14 @@ namespace EcommerceStore.Server.Migrations
                             OriginalPrice = 10.99m,
                             Price = 9.99m,
                             Title = "third product"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 4,
-                            DateCreated = new DateTime(24, 7, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "this is some very amazing product",
-                            Image = "urls",
-                            IsDeleted = false,
-                            IsPublic = false,
-                            OriginalPrice = 10.99m,
-                            Price = 7.99m,
-                            Title = "fourth product"
                         });
                 });
 
-            modelBuilder.Entity("EditionProduct", b =>
+            modelBuilder.Entity("EcommerceStore.Shared.Models.Edition", b =>
                 {
-                    b.Property<int>("EditionsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EditionsId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("EditionProduct");
-
-                    b.HasData(
-                        new
-                        {
-                            EditionsId = 1,
-                            ProductsId = 1
-                        },
-                        new
-                        {
-                            EditionsId = 1,
-                            ProductsId = 2
-                        },
-                        new
-                        {
-                            EditionsId = 1,
-                            ProductsId = 3
-                        },
-                        new
-                        {
-                            EditionsId = 2,
-                            ProductsId = 1
-                        },
-                        new
-                        {
-                            EditionsId = 2,
-                            ProductsId = 2
-                        },
-                        new
-                        {
-                            EditionsId = 3,
-                            ProductsId = 3
-                        },
-                        new
-                        {
-                            EditionsId = 4,
-                            ProductsId = 3
-                        },
-                        new
-                        {
-                            EditionsId = 5,
-                            ProductsId = 4
-                        },
-                        new
-                        {
-                            EditionsId = 6,
-                            ProductsId = 4
-                        });
+                    b.HasOne("EcommerceStore.Shared.Models.Product", null)
+                        .WithMany("Editions")
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("EcommerceStore.Shared.Models.Product", b =>
@@ -294,19 +201,9 @@ namespace EcommerceStore.Server.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("EditionProduct", b =>
+            modelBuilder.Entity("EcommerceStore.Shared.Models.Product", b =>
                 {
-                    b.HasOne("EcommerceStore.Shared.Models.Edition", null)
-                        .WithMany()
-                        .HasForeignKey("EditionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EcommerceStore.Shared.Models.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Editions");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,18 +5,25 @@
 <h3>ProductDetailsPage</h3>
 <p>@Id</p>
 <div>@product.Title</div>
+@if (product.Editions != null && product.Editions.Count > 0)
+{
+    <div class="form-group">
+        <select class="form-control">
+            @foreach (var edition in product.Editions)
+            {
+                <option>@edition.Name</option>
+            }
+        </select>
+    </div>
+}
 @code {
     [Parameter]
     public int Id{ get; set; }
 
-    public Product product { get; set; } = null;
-    protected override void OnInitialized()
+    public Product product { get; set; }
+
+    protected override async Task OnInitializedAsync()
     {
-        if(product==null || products.Products.Count==0)
-        {
-            products.LoadProducts();
-        }
-        product = products.Products.FirstOrDefault(p => p.Id == Id);
-        StateHasChanged();
+        product = await products.GetProductById(Id);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using EcommerceStore.Server.Services;
 using EcommerceStore.Shared.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceStore.Server.Controllers
@@ -31,7 +30,8 @@ namespace EcommerceStore.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            return Ok(await _productService.GetProduct(id));
+            var res = await _productService.GetProduct(id);
+            return Ok(res);
         }
       
     }

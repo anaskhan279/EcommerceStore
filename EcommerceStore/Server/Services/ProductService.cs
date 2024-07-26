@@ -21,7 +21,7 @@ namespace EcommerceStore.Server.Services
 
         public async Task<Product> GetProduct(int id)
         {
-            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            Product product = await _context.Products.Include(p => p.Editions).FirstOrDefaultAsync(p => p.Id == id);
             return product;
         }
 
