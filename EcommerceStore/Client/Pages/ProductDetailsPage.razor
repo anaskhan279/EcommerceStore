@@ -1,17 +1,17 @@
-﻿@page "/product/{id:int}"
+﻿@* @page "/product/{id:int}"
 @using EcommerceStore.Shared.Models
 @inject IProductAPI products
 
 <h3>ProductDetailsPage</h3>
 <p>@Id</p>
 <div>@product.Title</div>
-@if (product.Editions != null && product.Editions.Count > 0)
+@if (product.Variants != null && product.Variants.Count > 1)
 {
     <div class="form-group">
-        <select class="form-control">
-            @foreach (var edition in product.Editions)
+        <select class="form-control" @bind="currentEditionId">
+            @foreach (var variant in product.Variants)
             {
-                <option>@edition.Name</option>
+                <option value="@variant.EditionId">@variant.Edition.Name</option>
             }
         </select>
     </div>
@@ -21,9 +21,22 @@
     public int Id{ get; set; }
 
     public Product product { get; set; }
+    
+    private int currentEditionId = 1;
 
     protected override async Task OnInitializedAsync()
     {
         product = await products.GetProductById(Id);
+        if (product.Variants.Count > 0)
+        {
+            currentEditionId = product.Variants[0].EditionId;
+        }
+    }
+
+    private ProductVariant GetSelectedVariant()
+    {
+        var variant = product.Variants.FirstOrDefault(v => v.EditionId == currentEditionId);
+        return variant;
     }
 }
+ *@

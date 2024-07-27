@@ -25,5 +25,9 @@
     <ProjectReference Include="..\Shared\EcommerceStore.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 
 </Project>

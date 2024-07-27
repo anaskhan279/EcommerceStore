@@ -1,5 +1,4 @@
 ﻿using EcommerceStore.Server.Services;
-using EcommerceStore.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceStore.Server.Controllers
@@ -15,24 +14,19 @@ namespace EcommerceStore.Server.Controllers
             _productService = productService;
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public async Task<ActionResult<List<Product>>> GetAllProducts()
         {
             return Ok(await _productService.GetAllProducts());
         }
 
-        [HttpGet("Category/{categoryUrl}")]
-        public async Task<ActionResult<List<Product>>> GetProductsByCategory(string categoryUrl)
-        {
-            return Ok(await _productService.GetProductsByCategory(categoryUrl));
-        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var res = await _productService.GetProduct(id);
             return Ok(res);
-        }
+        }*/
       
     }
 }

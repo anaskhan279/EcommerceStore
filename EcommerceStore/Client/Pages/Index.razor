@@ -1,19 +1,7 @@
-﻿@page "/"
+﻿@* @page "/"
 @page "/{categoryUrl}"
 @inject ICategoryAPI categoryService
 @using EcommerceStore.Shared.Models
-
-@* @if(Category!=null)
-{
-    <h5>Welcome to @Category.Name category</h5>
-    <ProductListPage CategoryId="@Category.Id"></ProductListPage>
-}
-else
-{
-    <ProductListPage></ProductListPage>
-} *@
-
-
 
 <ProductListPage></ProductListPage>
 
@@ -34,12 +22,4 @@ else
     {
         await categoryService.LoadCategories();
     }
-    // protected override void OnParametersSet()
-    // {
-    //     if (CategoryUrl != null)
-    //     {
-    //         Category = categoryService.Categories.FirstOrDefault(c => c.Url.ToLower().Equals(CategoryUrl.ToLower()));
-    //     }
-    // }
-
-}
+} *@

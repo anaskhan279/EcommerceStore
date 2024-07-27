@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceStore.Server.Services
 {
-    public class CategoryService : ICategoryService
+    /*public class CategoryService : ICategoryService
     {
      
         private readonly DataContext _context;
@@ -21,5 +21,5 @@ namespace EcommerceStore.Server.Services
         {
             return await _context.Categories.FirstOrDefaultAsync(c => c.Url.ToLower().Equals(categoryUrl.ToLower()));
         }
-    }
+    }*/
 }

@@ -1,5 +1,4 @@
 ﻿using EcommerceStore.Server.Services;
-using EcommerceStore.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceStore.Server.Controllers
@@ -9,7 +8,7 @@ namespace EcommerceStore.Server.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
-        public CategoryController(ICategoryService categoryService)
+        /*public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }
@@ -17,6 +16,6 @@ namespace EcommerceStore.Server.Controllers
         public async Task<ActionResult<List<Category>>>GetCategories()
         {
             return Ok(await _categoryService.GetCategories());
-        }
+        }*/
     }
 }
